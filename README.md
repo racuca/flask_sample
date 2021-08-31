@@ -1,2 +1,4 @@
 # flask_sample
-flask test samples
+flask tutorial test samples
+
+
