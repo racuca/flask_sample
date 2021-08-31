@@ -41,8 +41,7 @@ def create_connection(db_file):
             conn.close()
 
 def init_db():
-    db = connect_db()
-    if db is None:
+    if os.path.isfile(app.config['DATABASE']) is False:
         create_connection(app.config['DATABASE'])
         db = connect_db()
 
@@ -60,10 +59,12 @@ init_db()
 #  app routing 
 @app.before_request
 def before_request():
+    print('before_request')
     g.db = connect_db()
 
 @app.teardown_request
 def teardown_request(exception):
+    print('teardown_request')
     g.db.close()
 
 @app.route('/')
